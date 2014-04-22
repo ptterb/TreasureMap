@@ -43,6 +43,10 @@ class testApp : public ofBaseApp{
     
     vector<ofImage> paths;
     
+    int currentShapeDebug = 0;
+    
+    vector<ofVec2f> adjust;
+    
     
         
 };
