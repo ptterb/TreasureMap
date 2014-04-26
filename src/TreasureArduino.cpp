@@ -48,8 +48,8 @@ void TreasureArduino::updateArduino(){
         
         if (!ofInRange(readNow, values[i] - fudge, values[i] + fudge)){
             values[i]= readNow;
+            ofLogNotice() << "PIN " << i << ": " << values[i];
         }
-        ofLogNotice() << "PIN " << i << ": " << values[i];
     }
     
 }

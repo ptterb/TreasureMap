@@ -15,6 +15,8 @@ void testApp::setup(){
     //loadPaths();
     
     arduino.setup();
+    
+    loadSounds();
 }
 
 //--------------------------------------------------------------
@@ -97,6 +99,7 @@ void testApp::nextStep(){
         
     } else {
         ofLogNotice() << "CONGRATS!";
+        yay.play();
         step = 0;
         pickSymbols();
     }
@@ -147,6 +150,17 @@ void testApp::setupTiles(){
     //    for (int i = 0; i < 5; i++) {
     //        adjust.push_back(ofVec2f(0, 0));
     //    }
+}
+
+void testApp::loadSounds(){
+    
+    background.loadSound("sounds/background.wav");
+    background.setLoop(true);
+    background.setVolume(0.5f);
+    background.play();
+    
+    yay.loadSound("sounds/yay.wav");
+        
 }
 
 //--------------------------------------------------------------

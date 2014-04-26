@@ -21,6 +21,9 @@ Tile::Tile(){
     twinkleColors.push_back(lightYellow);
     twinkleColors.push_back(darkYellow);
     
+    chimes3.loadSound("sounds/chimes-short3.mp3");
+
+    
 }
 
 void Tile::loadImage(string name){
@@ -50,9 +53,14 @@ void Tile::drawSymbol(int x, int y){
 
 void Tile::fadeIn(){
     
+    if (alpha == 0) {
+        chimes3.play();
+    }
+    
     if (alpha < 255){
         alpha+= 50;
     }
+    
     
 }
 

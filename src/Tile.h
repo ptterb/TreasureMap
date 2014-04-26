@@ -43,5 +43,7 @@ public:
     
     int alpha = 0;
     int frameRateFlicker = 7;
+    
+    ofSoundPlayer chimes3;
 };
 

@@ -18,6 +18,7 @@ class testApp : public ofBaseApp{
     void checkMatch();
     void nextStep();
     void setupTiles();
+    void loadSounds();
     
         
     ofFbo drawFBO;
@@ -45,6 +46,12 @@ class testApp : public ofBaseApp{
     vector<ofVec2f> adjust;
     
     TreasureArduino arduino;
+    
+    // --- Sounds --- //
+    
+    ofSoundPlayer background;
+    ofSoundPlayer yay;
+    
     
     
         
