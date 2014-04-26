@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "Tile.h"
+#include "TreasureArduino.h"
 
 class testApp : public ofBaseApp{
 
@@ -11,16 +12,12 @@ class testApp : public ofBaseApp{
 		void draw();
 
 		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
 		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
     void pickSymbols();
     void loadPaths();
+    void checkMatch();
+    void nextStep();
+    void setupTiles();
     
         
     ofFbo drawFBO;
@@ -46,6 +43,8 @@ class testApp : public ofBaseApp{
     int currentShapeDebug = 0;
     
     vector<ofVec2f> adjust;
+    
+    TreasureArduino arduino;
     
     
         

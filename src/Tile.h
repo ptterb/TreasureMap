@@ -22,6 +22,9 @@ class Tile {
     int tileX;
     int tileY;
     
+    int minRes;
+    int maxRes;
+    
 public:
     Tile();
     void loadImage(string name);
@@ -29,6 +32,8 @@ public:
     void drawSymbol(int x, int y);
     void fadeIn();
     void setAlpha(int value);
+    void setResistance(int _min, int _max);
+    ofVec2f getResistance();
     ofImage tileImage;
     
     vector<ofColor> twinkleColors;
@@ -37,5 +42,6 @@ public:
     ofColor darkYellow;
     
     int alpha = 0;
+    int frameRateFlicker = 7;
 };
 

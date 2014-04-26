@@ -29,6 +29,7 @@ void Tile::loadImage(string name){
 
 void Tile::drawSymbol(int x, int y){
     
+    
     ofPushMatrix();
     ofTranslate(x, y);
     
@@ -57,6 +58,15 @@ void Tile::fadeIn(){
 
 void Tile:: setAlpha(int value){
     alpha = value;
+}
+
+void Tile::setResistance(int _min, int _max){
+    minRes = _min;
+    maxRes = _max;
+}
+
+ofVec2f Tile::getResistance(){
+    return ofVec2f(minRes, maxRes);
 }
 
 

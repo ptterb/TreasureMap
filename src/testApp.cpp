@@ -3,16 +3,6 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
-    /*
-     
-     [notice ] Offsets 0: x-170 y-0
-     [notice ] Offsets 1: x-135 y--95
-     [notice ] Offsets 2: x-80 y--45
-     [notice ] Offsets 3: x-0 y--50
-     [notice ] Offsets 4: x--225 y--105
-     
-     */
-    
     ofSetFrameRate(7);
     
     pr.allocate(1024, 768, OF_IMAGE_COLOR);
@@ -20,27 +10,11 @@ void testApp::setup(){
     
     drawFBO.allocate(ofGetWidth(), ofGetHeight());
     
-    string images [10] = {"skull","anchor","wheel","cannon","bell","spyglass", "bone", "compass", "key","hourglass"};
+    setupTiles();
+    // NOT USING PATHS YET
+    //loadPaths();
     
-    for (int i = 0; i < 10; i++) {
-        Tile tile;
-        tile.loadImage(images[i]);
-        tiles.push_back(tile);
-    }
-    
-    pickSymbols();
-    loadPaths();
-
-    // Reset tile positions
-//    for (int i = 0; i < 5; i++) {
-//        adjust.push_back(ofVec2f(0, 0));
-//    }
-
-    adjust.push_back(ofVec2f(170, 0));
-    adjust.push_back(ofVec2f(135, -95));
-    adjust.push_back(ofVec2f(80, -45));
-    adjust.push_back(ofVec2f(0, -50));
-    adjust.push_back(ofVec2f(-225, -105));
+    arduino.setup();
 }
 
 //--------------------------------------------------------------
@@ -53,9 +27,12 @@ void testApp::update(){
     
     selectedTiles[step].fadeIn();
     
+    // update arduino values
+    arduino.update();
     
+    // Check for matches
+    checkMatch();
     
-
 }
 
 //--------------------------------------------------------------
@@ -67,7 +44,7 @@ void testApp::draw(){
     }
     
     selectedTiles[0].drawSymbol(20 + adjust[0].x, 20 + adjust[0].y);
-    paths[0].draw(20, 268);
+//    paths[0].draw(20, 268);
     selectedTiles[1].drawSymbol(200 + adjust[1].x, 350 + adjust[1].y);
     selectedTiles[2].drawSymbol(500 + adjust[2].x, 100 + adjust[2].y);
     selectedTiles[3].drawSymbol(800 + adjust[3].x, 300 + adjust[3].y);
@@ -98,6 +75,78 @@ void testApp::loadPaths(){
         paths.push_back(path);
     }
     
+}
+
+//--------------------------------------------------------------
+void testApp::checkMatch(){
+    
+    int currentValue = arduino.getValue(step);
+    
+    // Check if value is in the right range for the current tile.
+    
+    if (ofInRange(currentValue, selectedTiles[step].getResistance().x , selectedTiles[step].getResistance().y)) {
+        nextStep();
+    }
+    
+}
+
+void testApp::nextStep(){
+    
+    if (step < 4) {
+        step++;
+        
+    } else {
+        ofLogNotice() << "CONGRATS!";
+        step = 0;
+        pickSymbols();
+    }
+    
+    ofLogNotice() << step;
+    
+}
+
+void testApp::setupTiles(){
+    
+    string images [10] = {"skull","anchor","wheel","cannon","bell","spyglass", "bone", "compass", "key","hourglass"};
+    
+    ofVec2f res [10] =
+    {ofVec2f(100, 120), // skull
+        ofVec2f(100, 120),  // anchor
+        ofVec2f(100, 120),  // wheel
+        ofVec2f(100, 120),  // cannon
+        ofVec2f(100, 120),  // bell
+        ofVec2f(100, 120),  // spyglass
+        ofVec2f(100, 120),  // bone
+        ofVec2f(100, 120),  // compass
+        ofVec2f(100, 120),  // key
+        ofVec2f(100, 120)}; // hourglass
+    
+    for (int i = 0; i < 10; i++) {
+        Tile tile;
+        tile.loadImage(images[i]);
+        tile.setResistance(res[i].x, res[i].y);
+        tiles.push_back(tile);
+    }
+    
+    pickSymbols();
+    
+    /* Offsets for placement
+     [notice ] Offsets 0: x-170 y-0
+     [notice ] Offsets 1: x-135 y--95
+     [notice ] Offsets 2: x-80 y--45
+     [notice ] Offsets 3: x-0 y--50
+     [notice ] Offsets 4: x--225 y--105
+     */
+    adjust.push_back(ofVec2f(170, 0));
+    adjust.push_back(ofVec2f(135, -95));
+    adjust.push_back(ofVec2f(80, -45));
+    adjust.push_back(ofVec2f(0, -50));
+    adjust.push_back(ofVec2f(-225, -105));
+    
+    // Reset tile positions
+    //    for (int i = 0; i < 5; i++) {
+    //        adjust.push_back(ofVec2f(0, 0));
+    //    }
 }
 
 //--------------------------------------------------------------
@@ -154,58 +203,14 @@ void testApp::keyPressed(int key){
     ofLogNotice() << key;
 
 }
-
-//--------------------------------------------------------------
-void testApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void testApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void testApp::mouseDragged(int x, int y, int button){
-
-}
-
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
     
     if (button == 0){
-        if (step < 4) {
-            step++;
-            
-        } else {
-            ofLogNotice() << "CONGRATS!";
-            step = 0;
-            pickSymbols();
-        }
-        
-        ofLogNotice() << step;
+        nextStep();
     } else {
         drawPr = !drawPr;
     }
 
 }
 
-//--------------------------------------------------------------
-void testApp::mouseReleased(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
-void testApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void testApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void testApp::dragEvent(ofDragInfo dragInfo){ 
-
-}
