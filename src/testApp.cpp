@@ -111,9 +111,6 @@ void testApp::nextStep(){
         step = 0;
         pickSymbols();
     }
-    
-    ofLogNotice() << step;
-    
 }
 
 void testApp::setupTiles(){
@@ -177,26 +174,19 @@ void testApp::drawCongrats(){
     float stringX = (ofGetWidth()/2) - (eight.stringWidth(doneMessages[pickString])/2);
     
     
-    
-    
-    
     if (showCongrats){
         float stringAlpha = 1.0f - ((float)congratsTimer/totalCongratsTime);
+    
         ofSetColor(163, 31, 8, stringAlpha*255);
         eight.drawString(doneMessages[pickString], stringX, ofGetHeight()/2+96/2);
         
         congratsTimer++;
-        ofLogNotice() << stringAlpha;
-        
+    
         if (congratsTimer >= totalCongratsTime){
             showCongrats = false;
             congratsTimer = 0;
         }
-        
     }
-    
-    
-    
 }
 
 //--------------------------------------------------------------
@@ -248,7 +238,6 @@ void testApp::keyPressed(int key){
         default:
             break;
     }
-    
     
     ofLogNotice() << key;
 
