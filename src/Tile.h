@@ -27,6 +27,7 @@ class Tile {
     
 public:
     Tile();
+    void setup();
     void loadImage(string name);
     void drawSymbol();
     void drawSymbol(int x, int y);

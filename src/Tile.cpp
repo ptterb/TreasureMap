@@ -9,7 +9,10 @@
 #include "Tile.h"
 
 
-Tile::Tile(){
+Tile::Tile(){}
+
+void Tile::setup(){
+    
     
     tileImage.allocate(objectSize, objectSize, OF_IMAGE_COLOR_ALPHA);
     
@@ -22,8 +25,6 @@ Tile::Tile(){
     twinkleColors.push_back(darkYellow);
     
     chimes3.loadSound("sounds/chimes-short3.mp3");
-
-    
 }
 
 void Tile::loadImage(string name){

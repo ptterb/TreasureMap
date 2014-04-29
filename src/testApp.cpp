@@ -8,6 +8,8 @@ void testApp::setup(){
     pr.allocate(1024, 768, OF_IMAGE_COLOR);
     pr.loadImage("PR_just_island.png");
     
+    eight.loadFont("Pieces of Eight.ttf", 96);
+    
     drawFBO.allocate(ofGetWidth(), ofGetHeight());
     
     setupTiles();
@@ -52,6 +54,9 @@ void testApp::draw(){
     selectedTiles[3].drawSymbol(800 + adjust[3].x, 300 + adjust[3].y);
     selectedTiles[4].drawSymbol(1200 + adjust[4].x, 150 + adjust[4].y);
     
+    drawCongrats();
+
+    
 }
 //--------------------------------------------------------------
 void testApp::pickSymbols(){
@@ -63,6 +68,8 @@ void testApp::pickSymbols(){
         selectedTiles.push_back(workingTiles.at(rand));
         workingTiles.erase(workingTiles.begin()+rand);
     }
+    
+    pickString = ofRandom(0, 3);
     
 }
 
@@ -100,6 +107,7 @@ void testApp::nextStep(){
     } else {
         ofLogNotice() << "CONGRATS!";
         yay.play();
+        showCongrats = true;
         step = 0;
         pickSymbols();
     }
@@ -126,6 +134,7 @@ void testApp::setupTiles(){
     
     for (int i = 0; i < 10; i++) {
         Tile tile;
+        tile.setup();
         tile.loadImage(images[i]);
         tile.setResistance(res[i].x, res[i].y);
         tiles.push_back(tile);
@@ -161,6 +170,33 @@ void testApp::loadSounds(){
     
     yay.loadSound("sounds/yay.wav");
         
+}
+
+void testApp::drawCongrats(){
+    
+    float stringX = (ofGetWidth()/2) - (eight.stringWidth(doneMessages[pickString])/2);
+    
+    
+    
+    
+    
+    if (showCongrats){
+        float stringAlpha = 1.0f - ((float)congratsTimer/totalCongratsTime);
+        ofSetColor(163, 31, 8, stringAlpha*255);
+        eight.drawString(doneMessages[pickString], stringX, ofGetHeight()/2+96/2);
+        
+        congratsTimer++;
+        ofLogNotice() << stringAlpha;
+        
+        if (congratsTimer >= totalCongratsTime){
+            showCongrats = false;
+            congratsTimer = 0;
+        }
+        
+    }
+    
+    
+    
 }
 
 //--------------------------------------------------------------

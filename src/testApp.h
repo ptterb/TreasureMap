@@ -19,6 +19,7 @@ class testApp : public ofBaseApp{
     void nextStep();
     void setupTiles();
     void loadSounds();
+    void drawCongrats();
     
         
     ofFbo drawFBO;
@@ -46,6 +47,14 @@ class testApp : public ofBaseApp{
     vector<ofVec2f> adjust;
     
     TreasureArduino arduino;
+    
+    ofTrueTypeFont eight;
+    string doneMessages[3] = {"Great Job!", "Congratulations!", "Well Done, Matey!"};
+    int pickString;
+    bool showCongrats = false;
+    int congratsTimer;
+    int totalCongratsTime = 20;
+    
     
     // --- Sounds --- //
     
