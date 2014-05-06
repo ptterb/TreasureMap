@@ -19,6 +19,8 @@ void testApp::setup(){
     arduino.setup();
     
     loadSounds();
+    
+    output.setName("JollyRoger");
 }
 
 //--------------------------------------------------------------
@@ -44,8 +46,11 @@ void testApp::draw(){
     ofBackground(0);
     
     if (drawPr){
-        pr.draw(0, 0, ofGetWidth(), ofGetHeight());
+        ofSetColor(255, 255, 255, 150);
+        pr.draw(0, 0, 1440, 562);
     }
+    
+    ofSetColor(255, 255, 255, 100);
     
     selectedTiles[0].drawSymbol(20 + adjust[0].x, 20 + adjust[0].y);
 //    paths[0].draw(20, 268);
@@ -55,6 +60,8 @@ void testApp::draw(){
     selectedTiles[4].drawSymbol(1200 + adjust[4].x, 150 + adjust[4].y);
     
     drawCongrats();
+    
+    output.publishScreen();
 
     
 }
@@ -115,21 +122,23 @@ void testApp::nextStep(){
 
 void testApp::setupTiles(){
     
-    string images [10] = {"skull","anchor","wheel","cannon","bell","spyglass", "bone", "compass", "key","hourglass"};
+//    string images [10] = {"skull","anchor","wheel","cannon","bell","spyglass", "bone", "compass", "key","hourglass"};
+    string images [5] = {"skull","anchor","wheel","bell","spyglass"};
     
     ofVec2f res [10] =
-    {ofVec2f(100, 120), // skull
-        ofVec2f(100, 120),  // anchor
-        ofVec2f(100, 120),  // wheel
-        ofVec2f(100, 120),  // cannon
-        ofVec2f(100, 120),  // bell
-        ofVec2f(100, 120),  // spyglass
-        ofVec2f(100, 120),  // bone
-        ofVec2f(100, 120),  // compass
-        ofVec2f(100, 120),  // key
-        ofVec2f(100, 120)}; // hourglass
+    {ofVec2f(240, 270), // skull
+        ofVec2f(90, 140),  // anchor
+        ofVec2f(1000, 1015),  // wheel
+        //ofVec2f(90, 100),  // cannon
+        ofVec2f(700, 730),  // bell
+        ofVec2f(327, 350),  // spyglass
+        //ofVec2f(90, 100),  // bone
+        //ofVec2f(90, 100),  // compass
+        //ofVec2f(90, 100),  // key
+        //ofVec2f(90, 100)
+        }; // hourglass
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 5; i++) {
         Tile tile;
         tile.setup();
         tile.loadImage(images[i]);

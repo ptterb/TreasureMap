@@ -3,6 +3,7 @@
 #include "ofMain.h"
 #include "Tile.h"
 #include "TreasureArduino.h"
+#include "ofxSyphon.h"
 
 class testApp : public ofBaseApp{
 
@@ -54,6 +55,8 @@ class testApp : public ofBaseApp{
     bool showCongrats = false;
     int congratsTimer;
     int totalCongratsTime = 20;
+    
+    ofxSyphonServer output;
     
     
     // --- Sounds --- //

@@ -32,6 +32,10 @@ void TreasureArduino::setupArduino(){
     
     // Set A0 to analog read TODO: change to read all inputs
     arduino.sendAnalogPinReporting(0, ARD_ANALOG);
+    arduino.sendAnalogPinReporting(1, ARD_ANALOG);
+    arduino.sendAnalogPinReporting(2, ARD_ANALOG);
+    arduino.sendAnalogPinReporting(3, ARD_ANALOG);
+    arduino.sendAnalogPinReporting(4, ARD_ANALOG);
     
     ofLogNotice() << "Arduino set up";
     bSetup = true;
@@ -55,5 +59,6 @@ void TreasureArduino::updateArduino(){
 }
 
 int TreasureArduino::getValue(int tilePlace){
+//    ofLogNotice() << "PIN " << tilePlace << ": " << values[tilePlace];
     return values[tilePlace];
 }

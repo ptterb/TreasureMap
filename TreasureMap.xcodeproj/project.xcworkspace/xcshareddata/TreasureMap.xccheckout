@@ -12,6 +12,8 @@
 	<dict>
 		<key>49D146F4-858D-4EA0-926A-9958C5016405</key>
 		<string>ssh://github.com/ptterb/TreasureMap.git</string>
+		<key>604C2B6F-B494-4A4A-AB0D-BBFFF25E6E34</key>
+		<string>https://github.com/astellato/ofxSyphon.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>TreasureMap.xcodeproj/project.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>49D146F4-858D-4EA0-926A-9958C5016405</key>
 		<string>../..</string>
+		<key>604C2B6F-B494-4A4A-AB0D-BBFFF25E6E34</key>
+		<string>../../../../../addons/ofxSyphon</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>ssh://github.com/ptterb/TreasureMap.git</string>
@@ -28,6 +32,14 @@
 	<string>49D146F4-858D-4EA0-926A-9958C5016405</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>604C2B6F-B494-4A4A-AB0D-BBFFF25E6E34</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSyphon</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
