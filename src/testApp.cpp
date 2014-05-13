@@ -13,14 +13,12 @@ void testApp::setup(){
     drawFBO.allocate(ofGetWidth(), ofGetHeight());
     
     setupTiles();
-    // NOT USING PATHS YET
-    //loadPaths();
     
     arduino.setup();
     
     loadSounds();
     
-    output.setName("JollyRoger");
+    output.setName("JollyRoger"); // Syphon for projection mapping
 }
 
 //--------------------------------------------------------------
@@ -52,8 +50,8 @@ void testApp::draw(){
     
     ofSetColor(255, 255, 255, 100);
     
+    // Draw with offset
     selectedTiles[0].drawSymbol(20 + adjust[0].x, 20 + adjust[0].y);
-//    paths[0].draw(20, 268);
     selectedTiles[1].drawSymbol(200 + adjust[1].x, 350 + adjust[1].y);
     selectedTiles[2].drawSymbol(500 + adjust[2].x, 100 + adjust[2].y);
     selectedTiles[3].drawSymbol(800 + adjust[3].x, 300 + adjust[3].y);
@@ -81,28 +79,25 @@ void testApp::pickSymbols(){
 }
 
 //--------------------------------------------------------------
-void testApp::loadPaths(){
-    
-    string pathImages[5] = {"path1.png", "path1.png", "path1.png", "path1.png", "path1.png"};
-    
-    for (int i = 0; i < 5; i++) {
-        ofImage path;
-        path.loadImage("paths/" + pathImages[i]);
-        paths.push_back(path);
-    }
-    
-}
-
-//--------------------------------------------------------------
 void testApp::checkMatch(){
     
     int currentValue = arduino.getValue(step);
     
     // Check if value is in the right range for the current tile.
-    
-    if (ofInRange(currentValue, selectedTiles[step].getResistance().x , selectedTiles[step].getResistance().y)) {
-        nextStep();
+    if (step == 0){     // HACK!
+        if (ofInRange(currentValue, selectedTiles[step].getResistanceSlot1().x , selectedTiles[step].getResistanceSlot1().y)) {
+            nextStep();
+        }
+    } else if (step == 3){     // HACK!
+        if (ofInRange(currentValue, selectedTiles[step].getResistanceSlot4().x , selectedTiles[step].getResistanceSlot4().y)) {
+            nextStep();
+        }
+    } else {
+        if (ofInRange(currentValue, selectedTiles[step].getResistance().x , selectedTiles[step].getResistance().y)) {
+            nextStep();
+        }
     }
+    
     
 }
 
@@ -122,39 +117,45 @@ void testApp::nextStep(){
 
 void testApp::setupTiles(){
     
-//    string images [10] = {"skull","anchor","wheel","cannon","bell","spyglass", "bone", "compass", "key","hourglass"};
     string images [5] = {"skull","anchor","wheel","bell","spyglass"};
     
-    ofVec2f res [10] =
-    {ofVec2f(240, 270), // skull
-        ofVec2f(90, 140),  // anchor
-        ofVec2f(1000, 1015),  // wheel
-        //ofVec2f(90, 100),  // cannon
-        ofVec2f(700, 730),  // bell
-        ofVec2f(327, 350),  // spyglass
-        //ofVec2f(90, 100),  // bone
-        //ofVec2f(90, 100),  // compass
-        //ofVec2f(90, 100),  // key
-        //ofVec2f(90, 100)
-        }; // hourglass
+    // Add resistance ranges
+    ofVec2f res [5] =
+    {ofVec2f(920, 940), // skull
+        ofVec2f(170, 190),  // anchor
+        ofVec2f(5, 15),  // wheel
+        ofVec2f(40, 50),  // bell
+        ofVec2f(30, 39),  // spyglass
+        };
+    
+    ofVec2f resSlot1 [5] =
+    {ofVec2f(1010, 1020), // skull
+        ofVec2f(700, 710),  // anchor
+        ofVec2f(90, 100),  // wheel
+        ofVec2f(320, 335),  // bell
+        ofVec2f(250, 260),  // spyglass
+    };
+    
+    ofVec2f resSlot4 [5] =
+    {ofVec2f(920, 940), // skull
+        ofVec2f(170, 190),  // anchor
+        ofVec2f(5, 25),  // wheel
+        ofVec2f(48, 55),  // bell
+        ofVec2f(30, 44),  // spyglass
+    };
     
     for (int i = 0; i < 5; i++) {
         Tile tile;
         tile.setup();
         tile.loadImage(images[i]);
         tile.setResistance(res[i].x, res[i].y);
+        tile.setResistanceSlot1(resSlot1[i].x, resSlot1[i].y);
+        tile.setResistanceSlot4(resSlot4[i].x, resSlot4[i].y);
         tiles.push_back(tile);
     }
     
     pickSymbols();
     
-    /* Offsets for placement
-     [notice ] Offsets 0: x-170 y-0
-     [notice ] Offsets 1: x-135 y--95
-     [notice ] Offsets 2: x-80 y--45
-     [notice ] Offsets 3: x-0 y--50
-     [notice ] Offsets 4: x--225 y--105
-     */
     adjust.push_back(ofVec2f(170, 0));
     adjust.push_back(ofVec2f(135, -95));
     adjust.push_back(ofVec2f(80, -45));

@@ -15,7 +15,6 @@ class testApp : public ofBaseApp{
 		void keyPressed(int key);
 		void mousePressed(int x, int y, int button);
     void pickSymbols();
-    void loadPaths();
     void checkMatch();
     void nextStep();
     void setupTiles();

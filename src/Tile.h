@@ -25,6 +25,12 @@ class Tile {
     int minRes;
     int maxRes;
     
+    int minResSlot1;
+    int maxResSlot1;
+    
+    int minResSlot4;
+    int maxResSlot4;
+    
 public:
     Tile();
     void setup();
@@ -34,7 +40,11 @@ public:
     void fadeIn();
     void setAlpha(int value);
     void setResistance(int _min, int _max);
+    void setResistanceSlot1(int _min, int _max);
+    void setResistanceSlot4(int _min, int _max);
     ofVec2f getResistance();
+    ofVec2f getResistanceSlot1();
+    ofVec2f getResistanceSlot4();
     ofImage tileImage;
     
     vector<ofColor> twinkleColors;

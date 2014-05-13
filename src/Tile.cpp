@@ -74,8 +74,27 @@ void Tile::setResistance(int _min, int _max){
     maxRes = _max;
 }
 
+void Tile::setResistanceSlot1(int _min, int _max){
+    minResSlot1 = _min;
+    maxResSlot1 = _max;
+}
+
+void Tile::setResistanceSlot4(int _min, int _max){
+    minResSlot4 = _min;
+    maxResSlot4 = _max;
+}
+
 ofVec2f Tile::getResistance(){
     return ofVec2f(minRes, maxRes);
+}
+
+// HACK!! Resistance values for slot 1 were consistent, but different than slot 2 and 3
+ofVec2f Tile::getResistanceSlot1(){
+    return ofVec2f(minResSlot1, maxResSlot1);
+}
+
+ofVec2f Tile::getResistanceSlot4(){
+    return ofVec2f(minResSlot4, maxResSlot4);
 }
 
 
