@@ -43,7 +43,7 @@ void Tile::drawSymbol(int x, int y){
         for (int y = randSeed; y < objectSize; y+=5) {
             if (tileImage.getColor(x, y).a == 255) {
                 int twinkleSize = ofRandom(0, 5);
-                ofSetColor(twinkleColors.at(ofRandom(0, twinkleColors.size())), alpha);
+                ofSetColor(twinkleColors.at(ofRandom(0, twinkleColors.size()-1)), alpha);
                 ofEllipse(x, y, twinkleSize, twinkleSize);
                 ofSetColor(255,255,255);
             }

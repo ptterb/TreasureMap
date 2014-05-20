@@ -11,7 +11,7 @@
 
 void TreasureArduino::setup(){
     
-    arduino.connect("/dev/tty.usbmodem1421", 57600);
+    arduino.connect("/dev/tty.usbmodem1411", 57600);
     
     for (int i = 0; i < 5; i++) {
         values.push_back(0);

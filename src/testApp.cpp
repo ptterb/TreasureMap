@@ -140,8 +140,8 @@ void testApp::setupTiles(){
     {ofVec2f(920, 940), // skull
         ofVec2f(170, 190),  // anchor
         ofVec2f(5, 25),  // wheel
-        ofVec2f(48, 55),  // bell
-        ofVec2f(30, 44),  // spyglass
+        ofVec2f(43, 55),  // bell
+        ofVec2f(30, 40),  // spyglass
     };
     
     for (int i = 0; i < 5; i++) {
@@ -156,11 +156,11 @@ void testApp::setupTiles(){
     
     pickSymbols();
     
-    adjust.push_back(ofVec2f(170, 0));
-    adjust.push_back(ofVec2f(135, -95));
-    adjust.push_back(ofVec2f(80, -45));
-    adjust.push_back(ofVec2f(0, -50));
-    adjust.push_back(ofVec2f(-225, -105));
+    adjust.push_back(ofVec2f(-30, 0));
+    adjust.push_back(ofVec2f(35, -60));
+    adjust.push_back(ofVec2f(65, -180));
+    adjust.push_back(ofVec2f(20, -10));
+    adjust.push_back(ofVec2f(40, -155));
     
     // Reset tile positions
     //    for (int i = 0; i < 5; i++) {
@@ -188,7 +188,7 @@ void testApp::drawCongrats(){
         float stringAlpha = 1.0f - ((float)congratsTimer/totalCongratsTime);
     
         ofSetColor(163, 31, 8, stringAlpha*255);
-        eight.drawString(doneMessages[pickString], stringX, ofGetHeight()/2+96/2);
+        eight.drawString(doneMessages[pickString], stringX, ofGetHeight()-100);
         
         congratsTimer++;
     
